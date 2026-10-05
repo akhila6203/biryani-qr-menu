@@ -242,8 +242,8 @@ const [
 
             /* UI compatibility */
 
-            size:
-              item.portion,
+            // size:
+            //   item.portion,
 
             price,
 
@@ -1094,11 +1094,23 @@ if (successOrder) {
           {/* ================================================
               DESKTOP / TABLET HEADER
           ================================================ */}
-
           <div 
-           className="hidden grid-cols-[minmax(250px,1fr)_130px_120px_170px] items-center border-b-2 border-[#bf0000] px-2 py-3 text-sm font-bold text-[#bf0000] sm:grid">
-           {/* className="hidden grid-cols-[minmax(250px,1fr)_130px_120px_170px] items-center border-b-2 border-[#7c1114] px-2 py-3 text-sm font-bold text-[#7c1114] sm:grid"> */}
+            className="hidden grid-cols-[minmax(250px,1fr)_140px_150px] items-center border-b-2 border-[#bf0000] px-2 py-3 text-sm font-bold text-[#bf0000] sm:grid"
+          >
+            <div>
+              Biryani
+            </div>
 
+            <div>
+              Price
+            </div>
+
+            <div className="text-center">
+              Quantity
+            </div>
+          </div>
+          {/* <div 
+           className="hidden grid-cols-[minmax(250px,1fr)_130px_120px_170px] items-center border-b-2 border-[#bf0000] px-2 py-3 text-sm font-bold text-[#bf0000] sm:grid">
             <div>
               Biryani
             </div>
@@ -1115,7 +1127,7 @@ if (successOrder) {
               Quantity
             </div>
 
-          </div>
+          </div> */}
 
 
           {/* ================================================
@@ -1134,10 +1146,6 @@ if (successOrder) {
 
           )}
 
-
-          {/* ================================================
-              ERROR
-          ================================================ */}
 
           {!loading &&
             menuError && (
@@ -1161,10 +1169,6 @@ if (successOrder) {
           )}
 
 
-          {/* ================================================
-              EMPTY
-          ================================================ */}
-
           {!loading &&
             !menuError &&
             menuData.length ===
@@ -1181,10 +1185,6 @@ if (successOrder) {
           )}
 
 
-          {/* ================================================
-              MENU ROWS
-          ================================================ */}
-
           {!loading &&
             !menuError &&
             menuData.map(
@@ -1200,140 +1200,232 @@ if (successOrder) {
 
                 return (
 
+                  // <div
+                  //   key={item.id}
+                  //   className={`grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 py-4 sm:grid-cols-[minmax(250px,1fr)_130px_120px_170px] ${
+                  //     index !==
+                  //     menuData.length -
+                  //       1
+                  //       ? "border-b border-[#e5d6cf]"
+                  //       : ""
+                  //   }`}
+                  // >
+
+                  //   <div className="min-w-0">
+
+                  //     <h3 className="truncate text-[14px] font-bold text-[#351715] sm:text-[15px]">
+                  //       {item.name}
+                  //     </h3>
+
+
+                  //     <div className="mt-1.5 flex items-center gap-2 sm:hidden">
+
+                  //       <span className="rounded-md bg-[#bf0000]/10 px-2 py-1 text-[11px] font-semibold text-[#bf0000]">
+                  //       {/* <span className="rounded-md bg-[#f8eeee] px-2 py-1 text-[11px] font-semibold text-[#7c1114]"> */}
+                  //         {item.portion}
+                  //       </span>
+
+
+                  //       <span className="text-[14px] font-extrabold text-[#bf0000]">
+                  //         ₹
+                  //         {Number(
+                  //           item.amount
+                  //         )}
+                  //       </span>
+
+                  //     </div>
+
+                  //   </div>
+
+                  //   <div className="hidden sm:block">
+
+                  //     <span className="text-sm font-semibold text-[#62483f]">
+                  //       {item.portion}
+                  //     </span>
+
+                  //   </div>
+
+                  //   <div className="hidden sm:block">
+
+                  //     <span 
+                  //     className="text-[15px] font-extrabold text-[#bf0000]">
+                  //       ₹
+                  //       {Number(
+                  //         item.amount
+                  //       )}
+                  //     </span>
+
+                  //   </div>
+
+
+                  //   <div className="flex justify-end sm:justify-center">
+
+                  //     <div 
+                  //     className="flex items-center rounded-lg border border-[#bf0000]/20 bg-white p-1">
+
+
+                  //       {/* MINUS */}
+
+                  //       <button
+                  //         type="button"
+                  //         disabled={
+                  //           quantity ===
+                  //           0
+                  //         }
+                  //         onClick={() =>
+                  //           decreaseQuantity(
+                  //             item.id
+                  //           )
+                  //         }
+                  //         className="flex h-8 w-8 items-center justify-center rounded-md text-[#bf0000] transition hover:bg-[#bf0000]/10 disabled:opacity-30"
+                  //         // className="flex h-8 w-8 items-center justify-center rounded-md text-[#7c1114] transition hover:bg-[#f9eeee] disabled:opacity-30"
+                  //       >
+
+                  //         <Minus
+                  //           size={15}
+                  //         />
+
+                  //       </button>
+
+
+                  //       {/* NUMBER */}
+
+                  //       <span className="w-8 text-center text-[14px] font-black text-[#351715]">
+                  //         {quantity}
+                  //       </span>
+
+
+                  //       {/* PLUS */}
+
+                  //       <button
+                  //         type="button"
+                  //         onClick={() =>
+                  //           increaseQuantity(
+                  //             item.id
+                  //           )
+                  //         }
+                  //         className="flex h-8 w-8 items-center justify-center rounded-md bg-[#bf0000] text-white transition hover:bg-[#a50000]"
+                  //         // className="flex h-8 w-8 items-center justify-center rounded-md bg-[#7c1114] text-white transition hover:bg-[#5f0e10]"
+                  //       >
+
+                  //         <Plus
+                  //           size={15}
+                  //         />
+
+                  //       </button>
+
+                  //     </div>
+
+                  //   </div>
+
+                  // </div>
                   <div
-                    key={item.id}
-                    className={`grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 py-4 sm:grid-cols-[minmax(250px,1fr)_130px_120px_170px] ${
-                      index !==
-                      menuData.length -
-                        1
-                        ? "border-b border-[#e5d6cf]"
-                        : ""
-                    }`}
-                  >
+  key={item.id}
+  className={`grid grid-cols-[minmax(0,1fr)_70px_104px] items-center gap-2 py-4 sm:grid-cols-[minmax(250px,1fr)_140px_150px] sm:gap-3 ${
+    index !==
+    menuData.length - 1
+      ? "border-b border-[#e5d6cf]"
+      : ""
+  }`}
+>
+
+  {/* =====================================
+      MENU NAME
+  ===================================== */}
+
+  <div className="min-w-0">
+
+    <h3 className="truncate text-[13px] font-bold text-[#351715] sm:text-[15px]">
+      {item.name}
+    </h3>
+
+  </div>
 
 
-                    {/* NAME */}
+  {/* =====================================
+      AMOUNT
 
-                    <div className="min-w-0">
+      Mobile + Tablet + Desktop
+  ===================================== */}
 
-                      <h3 className="truncate text-[14px] font-bold text-[#351715] sm:text-[15px]">
-                        {item.name}
-                      </h3>
+  <div>
 
+    <span className="whitespace-nowrap text-[13px] font-extrabold text-[#bf0000] sm:text-[15px]">
 
-                      {/* MOBILE PORTION + PRICE */}
+      ₹
+      {Number(
+        item.amount
+      ).toLocaleString(
+        "en-IN"
+      )}
 
-                      <div className="mt-1.5 flex items-center gap-2 sm:hidden">
+    </span>
 
-                        <span className="rounded-md bg-[#bf0000]/10 px-2 py-1 text-[11px] font-semibold text-[#bf0000]">
-                        {/* <span className="rounded-md bg-[#f8eeee] px-2 py-1 text-[11px] font-semibold text-[#7c1114]"> */}
-                          {item.portion}
-                        </span>
-
-                        {/* <span className="text-[14px] font-extrabold text-[#7c1114]"> */}
-                        <span className="text-[14px] font-extrabold text-[#bf0000]">
-                          ₹
-                          {Number(
-                            item.amount
-                          )}
-                        </span>
-
-                      </div>
-
-                    </div>
+  </div>
 
 
-                    {/* DESKTOP PORTION */}
+  {/* =====================================
+      QUANTITY
+  ===================================== */}
 
-                    <div className="hidden sm:block">
+  <div className="flex justify-end sm:justify-center">
 
-                      <span className="text-sm font-semibold text-[#62483f]">
-                        {item.portion}
-                      </span>
+    <div className="flex items-center rounded-lg border border-[#bf0000]/20 bg-white p-[3px]">
 
-                    </div>
+      {/* MINUS */}
 
+      <button
+        type="button"
+        disabled={
+          quantity === 0
+        }
+        onClick={() =>
+          decreaseQuantity(
+            item.id
+          )
+        }
+        className="flex h-7 w-7 items-center justify-center rounded-md text-[#bf0000] transition hover:bg-[#bf0000]/10 disabled:opacity-30 sm:h-8 sm:w-8"
+      >
 
-                    {/* DESKTOP PRICE */}
+        <Minus
+          size={14}
+        />
 
-                    <div className="hidden sm:block">
-
-                      <span 
-                      // className="text-[15px] font-extrabold text-[#7c1114]"
-                      className="text-[15px] font-extrabold text-[#bf0000]">
-                        ₹
-                        {Number(
-                          item.amount
-                        )}
-                      </span>
-
-                    </div>
-
-
-                    {/* QUANTITY */}
-
-                    <div className="flex justify-end sm:justify-center">
-
-                      <div 
-                      // className="flex items-center rounded-lg border border-[#dfcbc3] bg-white p-1"
-                      className="flex items-center rounded-lg border border-[#bf0000]/20 bg-white p-1">
+      </button>
 
 
-                        {/* MINUS */}
+      {/* QUANTITY NUMBER */}
 
-                        <button
-                          type="button"
-                          disabled={
-                            quantity ===
-                            0
-                          }
-                          onClick={() =>
-                            decreaseQuantity(
-                              item.id
-                            )
-                          }
-                          className="flex h-8 w-8 items-center justify-center rounded-md text-[#bf0000] transition hover:bg-[#bf0000]/10 disabled:opacity-30"
-                          // className="flex h-8 w-8 items-center justify-center rounded-md text-[#7c1114] transition hover:bg-[#f9eeee] disabled:opacity-30"
-                        >
+      <span className="w-6 text-center text-[13px] font-black text-[#351715] sm:w-8 sm:text-[14px]">
 
-                          <Minus
-                            size={15}
-                          />
+        {quantity}
 
-                        </button>
+      </span>
 
 
-                        {/* NUMBER */}
+      {/* PLUS */}
 
-                        <span className="w-8 text-center text-[14px] font-black text-[#351715]">
-                          {quantity}
-                        </span>
+      <button
+        type="button"
+        onClick={() =>
+          increaseQuantity(
+            item.id
+          )
+        }
+        className="flex h-7 w-7 items-center justify-center rounded-md bg-[#bf0000] text-white transition hover:bg-[#a50000] sm:h-8 sm:w-8"
+      >
 
+        <Plus
+          size={14}
+        />
 
-                        {/* PLUS */}
+      </button>
 
-                        <button
-                          type="button"
-                          onClick={() =>
-                            increaseQuantity(
-                              item.id
-                            )
-                          }
-                          className="flex h-8 w-8 items-center justify-center rounded-md bg-[#bf0000] text-white transition hover:bg-[#a50000]"
-                          // className="flex h-8 w-8 items-center justify-center rounded-md bg-[#7c1114] text-white transition hover:bg-[#5f0e10]"
-                        >
+    </div>
 
-                          <Plus
-                            size={15}
-                          />
+  </div>
 
-                        </button>
-
-                      </div>
-
-                    </div>
-
-                  </div>
+</div>
 
                 );
 
@@ -1502,16 +1594,17 @@ if (successOrder) {
 
                       <div>
 
-                        {/* <p className="text-sm font-semibold text-[#4b2a25]"> */}
                         <p className="text-sm font-semibold text-slate-800">
                           {item.name}
                         </p>
 
-                        {/* <p className="mt-0.5 text-xs text-[#92766c]"> */}
-                        <p className="mt-0.5 text-xs text-slate-500">
+                        {/* <p className="mt-0.5 text-xs text-slate-500">
                           {item.portion}
                           {" × "}
                           {item.quantity}
+                        </p> */}
+                        <p className="mt-0.5 text-xs text-slate-500">
+                          Qty: {item.quantity}
                         </p>
 
                       </div>
