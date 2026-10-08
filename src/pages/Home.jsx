@@ -62,6 +62,7 @@ export default function Home() {
   ] = useState({
     name: "",
     mobile: "",
+    location: "",
   });
 
   const [
@@ -244,7 +245,7 @@ const [
 
             // size:
             //   item.portion,
-
+             size: item.size || item.portion_type || item.portion || "",
             price,
 
             quantity,
@@ -420,6 +421,7 @@ const [
     };
 
 
+
   /* =======================================================
      PAY NOW
   ======================================================= */
@@ -474,7 +476,21 @@ const [
         return;
       }
 
+      /* =====================================
+   LOCATION VALIDATION
+===================================== */
 
+const location = customer.location.trim();
+
+const allowedLocations = [
+  "Main campus",
+  "Manikonda campus",
+];
+
+if (!allowedLocations.includes(location)) {
+  alert("Please select a valid location.");
+  return;
+}
       /* =====================================
          CART
       ===================================== */
@@ -560,10 +576,17 @@ const [
            4. status = pending
         ===================================== */
 
-        const response =
+  //       const response =
+  // await createPaymentOrderApi({
+  //   customer_name: customerName,
+  //   mobile: mobile,
+  //   cart_id: cartId,
+  // });
+  const response =
   await createPaymentOrderApi({
     customer_name: customerName,
     mobile: mobile,
+    location: location,
     cart_id: cartId,
   });
 
@@ -675,6 +698,9 @@ const [
     verifiedData.mobile ||
     mobile,
 
+    location:
+  verifiedData.location || location,
+
   totalAmount:
     Number(
       verifiedData.total_amount ||
@@ -693,6 +719,7 @@ const [
   setCustomer({
     name: "",
     mobile: "",
+    location: ""
   });
 
 
@@ -945,7 +972,17 @@ if (successOrder) {
 
           </div>
 
+              {/* LOCATION */}
 
+<div className="flex items-center justify-between border-b border-[#eadbd3] py-3">
+  <span className="text-sm text-[#806c66]">
+    Location
+  </span>
+
+  <span className="text-sm font-bold text-[#351b17]">
+    {successOrder.location}
+  </span>
+</div>
           <div className="flex items-center justify-between pt-3">
 
             <span className="text-sm font-semibold text-[#351b17]">
@@ -1095,12 +1132,13 @@ if (successOrder) {
               DESKTOP / TABLET HEADER
           ================================================ */}
           <div 
-            className="hidden grid-cols-[minmax(250px,1fr)_140px_150px] items-center border-b-2 border-[#bf0000] px-2 py-3 text-sm font-bold text-[#bf0000] sm:grid"
+           className="hidden grid-cols-[minmax(250px,1fr)_130px_120px_170px] items-center border-b-2 border-[#bf0000] px-2 py-3 text-sm font-bold text-[#bf0000] sm:grid"
+            // className="hidden grid-cols-[minmax(250px,1fr)_140px_150px] items-center border-b-2 border-[#bf0000] px-2 py-3 text-sm font-bold text-[#bf0000] sm:grid"
           >
             <div>
               Biryani
             </div>
-
+              <div>Size</div>
             <div>
               Price
             </div>
@@ -1319,11 +1357,19 @@ if (successOrder) {
                   //   </div>
 
                   // </div>
-                  <div
+//                   <div
+//   key={item.id}
+//   className={`grid grid-cols-[minmax(0,1fr)_70px_104px] items-center gap-2 py-4 sm:grid-cols-[minmax(250px,1fr)_140px_150px] sm:gap-3 ${
+//     index !==
+//     menuData.length - 1
+//       ? "border-b border-[#e5d6cf]"
+//       : ""
+//   }`}
+// >
+<div
   key={item.id}
-  className={`grid grid-cols-[minmax(0,1fr)_70px_104px] items-center gap-2 py-4 sm:grid-cols-[minmax(250px,1fr)_140px_150px] sm:gap-3 ${
-    index !==
-    menuData.length - 1
+  className={`grid grid-cols-[minmax(0,1fr)_65px_70px_104px] items-center gap-2 py-4 sm:grid-cols-[minmax(250px,1fr)_130px_120px_170px] sm:gap-3 ${
+    index !== menuData.length - 1
       ? "border-b border-[#e5d6cf]"
       : ""
   }`}
@@ -1341,7 +1387,13 @@ if (successOrder) {
 
   </div>
 
+{/* SIZE */}
 
+<div className="min-w-0">
+  <span className="block truncate text-[12px] font-semibold capitalize text-[#62483f] sm:text-sm">
+    {item.size || item.portion_type || item.portion || "-"}
+  </span>
+</div>
   {/* =====================================
       AMOUNT
 
@@ -1603,8 +1655,11 @@ if (successOrder) {
                           {" × "}
                           {item.quantity}
                         </p> */}
-                        <p className="mt-0.5 text-xs text-slate-500">
+                        {/* <p className="mt-0.5 text-xs text-slate-500">
                           Qty: {item.quantity}
+                        </p> */}
+                        <p className="mt-0.5 text-xs text-slate-500">
+                          {item.size || "-"} × {item.quantity}
                         </p>
 
                       </div>
@@ -1742,6 +1797,39 @@ if (successOrder) {
 
               </div>
 
+
+              {/* LOCATION */}
+
+<div>
+  <label className="mb-1.5 block text-sm font-semibold text-slate-700">
+    Location
+  </label>
+
+  <select
+    value={customer.location}
+    disabled={paymentLoading}
+    onChange={(event) =>
+      setCustomer((previous) => ({
+        ...previous,
+        location: event.target.value,
+      }))
+    }
+    required
+    className="h-12 w-full rounded-xl border border-slate-300 bg-white px-4 text-sm text-slate-800 outline-none transition focus:border-[#bf0000] focus:ring-2 focus:ring-[#bf0000]/10 disabled:bg-slate-50"
+  >
+    <option value="">
+      Select Location
+    </option>
+
+    <option value="Main campus">
+      Main campus
+    </option>
+
+    <option value="Manikonda campus">
+      Manikonda campus
+    </option>
+  </select>
+</div>
 
               {/* PAY NOW */}
 
